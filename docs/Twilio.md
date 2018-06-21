@@ -1,6 +1,6 @@
 
 # LiteX Twilio Sms
-LiteX.Sms.Twilio is a sms lib which is based on LiteX.Sms.Core and Twilio.
+LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
 
 
 ## Add a dependency
@@ -11,16 +11,17 @@ Run the nuget command for installing the client as,
 * `Install-Package LiteX.Sms.Core`
 * `Install-Package LiteX.Sms.Twilio`
 
+
 ## Configuration
 
 **AppSettings**
 ```js
 {
-  //LiteX Twilio settings
+  //LiteX Twilio Sms settings
   "TwilioConfig": {
-    "AccountSid": "--- REPLACE WITH YOUR AccountSid ---",
-    "AuthToken": "--- REPLACE WITH YOUR AuthToken ---",
-    "FromNumber": "--- REPLACE WITH YOUR FromNumber ---",
+    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
+    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---"
   }
 }
 ```
@@ -31,6 +32,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        #region LiteX Sms (Twilio)
+
         // 1. Use default configuration from appsettings.json's 'TwilioConfig'
         services.AddLiteXTwilioSms();
 
@@ -46,13 +49,15 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var twilioConfig = new TwilioConfig();
+        var twilioConfig = new TwilioConfig()
+        {
+            AccountSid = "",
+            AuthToken = "",
+            FromNumber = ""
+        };
         services.AddLiteXTwilioSms(twilioConfig);
-    }
 
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-    {
-
+        #endregion
     }
 }
 ```
@@ -65,6 +70,7 @@ public class Startup
 /// <summary>
 /// Customer controller
 /// </summary>
+[Route("api/[controller]")]
 public class CustomerController : Controller
 {
     #region Fields
@@ -89,49 +95,49 @@ public class CustomerController : Controller
     #region Methods
 
     /// <summary>
+    /// Get Sms Provider Type
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [Route("get-sms-provider-type")]
+    public IActionResult GetSmsProviderType()
+    {
+        return Ok(_smsSender.SmsProviderType.ToString());
+    }
+
+    /// <summary>
     /// Send email to customer
     /// </summary>
-    /// <param name="customer"></param>
+    /// <param name="toPhoneNumber">To phone number</param>
+    /// <param name="messageText">message text</param>
     /// <returns></returns>
-    public IActionResult SendSmsToCustomer(Customer customer)
+    [HttpPost]
+    [Route("send-sms-to-customer")]
+    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
     {
         try
         {
-            string message = "test message!",
-            toPhoneNumber = "+11234567890",
+            toPhoneNumber = toPhoneNumber ?? "+919426432254";
+            messageText = messageText ?? "I am LiteX Sms!";
 
-            _smsSender.SendSms(toPhoneNumber, message);
+            _smsSender.SendSms(toPhoneNumber, messageText);
+
+            // Async
+            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
+
+            return Ok();
         }
         catch (Exception ex)
         {
-
             return BadRequest(ex);
         }
-        return Ok();
-    }
-
-    #endregion
-
-    #region Utilities
-
-    private IList<Customer> GetCustomers()
-    {
-        IList<Customer> customers = new List<Customer>();
-
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Sms = "toaashishpatel@outlook.com" });
-
-        return customers;
-    }
-
-    private Customer GetCustomerById(int id)
-    {
-        Customer customer = null;
-
-        customer = GetCustomers().ToList().FirstOrDefault(x => x.Id == id);
-
-        return customer;
     }
 
     #endregion
 }
 ```
+
+
+### Coming soon...
+* Voice Sms
+* Bulk Sms
