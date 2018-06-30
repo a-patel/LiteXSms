@@ -1,39 +1,46 @@
 
 # LiteX Sinch Sms
-LiteX.Sms.Sinch is a sms library which is based on LiteX.Sms.Core and Sinch Sms API.
+> LiteX.Sms.Sinch is a sms library which is based on LiteX.Sms.Core and Sinch Sms API.
+      
+Allow sending texts via Sinch.
+      
+Wrapper around Sinch api to send sms messages from any type of application.
 
-## Add a dependency
+Small library for manage sms with Sinch. A quick setup for Sinch Sms.
 
-### Nuget
-
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Sms.Core`
-* `Install-Package LiteX.Sms.Sinch`
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Sinch integration with your system.
 
 
+## Basic Usage
 
-## Configuration
 
-**AppSettings**
+### Install the package
+
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Sinch/).
+
+```Powershell
+PM> Install-Package LiteX.Sms.Sinch
+```
+
+##### AppSettings
 ```js
-{
+{  
   //LiteX Sinch Sms settings
   "SinchConfig": {
     "ApiKey": "--- REPLACE WITH YOUR Sinch ApiKey ---",
     "ApiSecret": "--- REPLACE WITH YOUR Sinch ApiSecret ---",
-    "FromNumber": "--- REPLACE WITH Sinch From Number ---"
+    "FromNumber": "--- REPLACE WITH Sinch From Number ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Sms (Sinch)
-
         // 1. Use default configuration from appsettings.json's 'SinchConfig'
         services.AddLiteXSinchSms();
 
@@ -44,6 +51,7 @@ public class Startup
             option.ApiKey = "";
             option.ApiSecret = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -53,89 +61,22 @@ public class Startup
         {
             ApiKey = "",
             ApiSecret = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXSinchSms(sinchConfig);
-
-        #endregion
+        
+        
+        // add logging (optional)
+        services.AddLiteXLogging();
     }
 }
 ```
 
+### Sample Usage Example
+> Same for all providers. 
 
-## Usage
-
-**Controller or Business layer**
-```cs
-/// <summary>
-/// Customer controller
-/// </summary>
-[Route("api/[controller]")]
-public class CustomerController : Controller
-{
-    #region Fields
-
-    private readonly ISmsSender _smsSender;
-
-    #endregion
-
-    #region Ctor
-
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    /// <param name="smsSender"></param>
-    public CustomerController(ISmsSender smsSender)
-    {
-        _smsSender = smsSender;
-    }
-
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Get Sms Provider Type
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("get-sms-provider-type")]
-    public IActionResult GetSmsProviderType()
-    {
-        return Ok(_smsSender.SmsProviderType.ToString());
-    }
-
-    /// <summary>
-    /// Send email to customer
-    /// </summary>
-    /// <param name="toPhoneNumber">To phone number</param>
-    /// <param name="messageText">message text</param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("send-sms-to-customer")]
-    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
-    {
-        try
-        {
-            toPhoneNumber = toPhoneNumber ?? "+919426432254";
-            messageText = messageText ?? "I am LiteX Sms!";
-
-            _smsSender.SendSms(toPhoneNumber, messageText);
-
-            // Async
-            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
-    }
-
-    #endregion
-}
-```
+For more helpful information about LiteX Sms, Please click [here.](https://github.com/a-patel/LiteXSms/blob/master/README.md#step-3--use-in-controller-or-business-layer-memo)
 
 
 ### Coming soon...
