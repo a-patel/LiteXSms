@@ -1,40 +1,48 @@
 
 # LiteX Nexmo Sms
 LiteX.Sms.Nexmo is a sms library which is based on LiteX.Sms.Core and Nexmo Sms API.
+      
+Allow sending texts via Nexmo.
+      
+Wrapper around Nexmo api to send sms messages from any type of application.
 
-## Add a dependency
+Small library for manage sms with Nexmo. A quick setup for Nexmo Sms.
 
-### Nuget
-
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Sms.Core`
-* `Install-Package LiteX.Sms.Nexmo`
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Nexmo integration with your system.
 
 
-## Configuration
+## Basic Usage
 
-**AppSettings**
+
+### Install the package
+
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Nexmo/).
+
+```Powershell
+PM> Install-Package LiteX.Sms.Nexmo
+```
+
+##### AppSettings
 ```js
-{
+{  
   //LiteX Nexmo Sms settings
   "NexmoConfig": {
     "ApiKey": "--- REPLACE WITH YOUR Nexmo ApiKey ---",
     "ApiSecret": "--- REPLACE WITH YOUR Nexmo ApiSecret ---",
     "ApplicationId": "--- REPLACE WITH YOUR Nexmo ApplicationId ---",
     "ApplicationKey": "--- REPLACE WITH YOUR Nexmo ApplicationKey ---",
-    "FromNumber": "--- REPLACE WITH Nexmo From Number ---"
+    "FromNumber": "--- REPLACE WITH Nexmo From Number ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Sms (Nexmo)
-
         // 1. Use default configuration from appsettings.json's 'NexmoConfig'
         services.AddLiteXNexmoSms();
 
@@ -47,6 +55,7 @@ public class Startup
             option.ApplicationId = "";
             option.ApplicationKey = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -58,89 +67,22 @@ public class Startup
             ApiSecret = "",
             ApplicationId = "",
             ApplicationKey = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
-        services.AddLiteXNexmoSms(nexmoConfig);
-
-        #endregion
+        services.AddLiteXNexmoSms(nexmoConfig);        
+        
+        
+        // add logging (optional)
+        services.AddLiteXLogging();
     }
 }
 ```
 
+### Sample Usage Example
+> Same for all providers. 
 
-## Usage
-
-**Controller or Business layer**
-```cs
-/// <summary>
-/// Customer controller
-/// </summary>
-[Route("api/[controller]")]
-public class CustomerController : Controller
-{
-    #region Fields
-
-    private readonly ISmsSender _smsSender;
-
-    #endregion
-
-    #region Ctor
-
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    /// <param name="smsSender"></param>
-    public CustomerController(ISmsSender smsSender)
-    {
-        _smsSender = smsSender;
-    }
-
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Get Sms Provider Type
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("get-sms-provider-type")]
-    public IActionResult GetSmsProviderType()
-    {
-        return Ok(_smsSender.SmsProviderType.ToString());
-    }
-
-    /// <summary>
-    /// Send email to customer
-    /// </summary>
-    /// <param name="toPhoneNumber">To phone number</param>
-    /// <param name="messageText">message text</param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("send-sms-to-customer")]
-    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
-    {
-        try
-        {
-            toPhoneNumber = toPhoneNumber ?? "+919426432254";
-            messageText = messageText ?? "I am LiteX Sms!";
-
-            _smsSender.SendSms(toPhoneNumber, messageText);
-
-            // Async
-            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
-    }
-
-    #endregion
-}
-```
+For more helpful information about LiteX Sms, Please click [here.](https://github.com/a-patel/LiteXSms/blob/master/README.md#step-3--use-in-controller-or-business-layer-memo)
 
 
 ### Coming soon...
