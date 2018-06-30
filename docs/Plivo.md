@@ -1,37 +1,45 @@
 # LiteX Plivo Sms
 LiteX.Sms.Plivo is a sms library which is based on LiteX.Sms.Core and Plivo Sms API.
+      
+Allow sending texts via Plivo.
+      
+Wrapper around Plivo api to send sms messages from any type of application.
 
-## Add a dependency
+Small library for manage sms with Plivo. A quick setup for Plivo Sms.
 
-### Nuget
-
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Sms.Core`
-* `Install-Package LiteX.Sms.Plivo`
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Plivo integration with your system.
 
 
-## Configuration
+## Basic Usage
 
-**AppSettings**
+
+### Install the package
+
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Plivo/).
+
+```Powershell
+PM> Install-Package LiteX.Sms.Plivo
+```
+
+##### AppSettings
 ```js
-{
+{  
   //LiteX Plivo Sms settings
   "PlivoConfig": {
     "AuthId": "--- REPLACE WITH YOUR Plivo Account SID ---",
     "AuthToken": "--- REPLACE WITH YOUR Plivo Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Plivo From Number ---"
+    "FromNumber": "--- REPLACE WITH Plivo From Number ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-         #region LiteX Sms (Plivo)
-
         // 1. Use default configuration from appsettings.json's 'PlivoConfig'
         services.AddLiteXPlivoSms();
 
@@ -42,6 +50,7 @@ public class Startup
             option.AuthId = "";
             option.AuthToken = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -51,89 +60,21 @@ public class Startup
         {
             AuthId = "",
             AuthToken = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
-        services.AddLiteXPlivoSms(plivoConfig);
-
-        #endregion
+        services.AddLiteXPlivoSms(plivoConfig);        
+        
+        // add logging (optional)
+        services.AddLiteXLogging();
     }
 }
 ```
 
+### Sample Usage Example
+> Same for all providers. 
 
-## Usage
-
-**Controller or Business layer**
-```cs
-/// <summary>
-/// Customer controller
-/// </summary>
-[Route("api/[controller]")]
-public class CustomerController : Controller
-{
-    #region Fields
-
-    private readonly ISmsSender _smsSender;
-
-    #endregion
-
-    #region Ctor
-
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    /// <param name="smsSender"></param>
-    public CustomerController(ISmsSender smsSender)
-    {
-        _smsSender = smsSender;
-    }
-
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Get Sms Provider Type
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("get-sms-provider-type")]
-    public IActionResult GetSmsProviderType()
-    {
-        return Ok(_smsSender.SmsProviderType.ToString());
-    }
-
-    /// <summary>
-    /// Send email to customer
-    /// </summary>
-    /// <param name="toPhoneNumber">To phone number</param>
-    /// <param name="messageText">message text</param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("send-sms-to-customer")]
-    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
-    {
-        try
-        {
-            toPhoneNumber = toPhoneNumber ?? "+919426432254";
-            messageText = messageText ?? "I am LiteX Sms!";
-
-            _smsSender.SendSms(toPhoneNumber, messageText);
-
-            // Async
-            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
-    }
-
-    #endregion
-}
-```
+For more helpful information about LiteX Sms, Please click [here.](https://github.com/a-patel/LiteXSms/blob/master/README.md#step-3--use-in-controller-or-business-layer-memo)
 
 
 ### Coming soon...
