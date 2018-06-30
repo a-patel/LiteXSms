@@ -216,7 +216,9 @@ public class Startup
         services.AddLiteXSinchSms(sinchConfig);
 
         #endregion
-
+        
+        
+        // add logging (optional)
         services.AddLiteXLogging();
     }
 }
