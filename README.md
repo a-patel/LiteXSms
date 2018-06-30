@@ -1,35 +1,74 @@
 # LiteXSms
-Abstract interface to implement any kind of basic sms message services (e.g. Twilio, Plivo, Sinch, Nexmo)
+> LiteXSms is simple yet powerful and very high-performance sms mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending sms more easier!
+> Provide Sms service for any type of application (.NET Core, .NET Standard).
 
-## Add a dependency
+Abstract interface to implement any kind of basic sms message services (e.g. Twilio, Plivo, Nexmo, Sinch). Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with sms integration with your system.
 
-### Nuget
+It supports various sms providers and implements many advanced features. You can also write your own and extend it also extend existing providers.
 
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Sms.Core`
-* `Install-Package LiteX.Sms.Twilio`
-* `Install-Package LiteX.Sms.Plivo`
-* `Install-Package LiteX.Sms.Sinch`
-* `Install-Package LiteX.Sms.Nexmo`
+Easily migrate or switch between one to another provider with no code breaking changes.
+
+Having a default/generic implementation to wrap the Twilio, Plivo, Nexmo, Sinch and independed on the underlying provider SDK(s).
+
+The Core library contains all base interfaces and tools. One should install at least one other LiteXSms package to get sms handle implementations.
+
+This is the ASP.NET Core configuration integration package (Built-in).
 
 
-## Configuration
 
-**AppSettings**
+
+## Cache Providers :books:
+- [Twilio](docs/Twilio.md)
+- [Plivo](docs/Plivo.md)
+- [Nexmo](docs/Nexmo.md)
+- [Sinch](docs/Sinch.md)
+
+
+
+## Features :pager:
+- Async compatible
+- Thread safe, concurrency ready
+- Interface based API to support the test driven development and dependency injection
+- Leverages a provider model on top of ILiteXSmsSender under the hood and can be extended with your own implementation
+
+
+
+## Basic Usage :page_facing_up:
+
+
+### Step 1 : Install the package :package:
+
+> Choose one kinds of sms provider type that you needs and install it via [Nuget](https://www.nuget.org/profiles/iamaashishpatel).
+> To install LiteXSms, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
+
+```Powershell
+PM> Install-Package LiteX.Sms.Twilio
+PM> Install-Package LiteX.Sms.Plivo
+PM> Install-Package LiteX.Sms.Nexmo
+PM> Install-Package LiteX.Sms.Sinch
+```
+
+### Step 2 : Configuration 🔨 
+> Different types of sms provider have their own way to config.
+> Here are samples that show you how to config.
+
+##### 2.1 : AppSettings 
 ```js
 {
   //LiteX Twilio Sms settings
   "TwilioConfig": {
     "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
     "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Twilio From Number ---"
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
+    "EnableLogging": true
   },
 
   //LiteX Plivo Sms settings
   "PlivoConfig": {
     "AuthId": "--- REPLACE WITH YOUR Plivo Account SID ---",
     "AuthToken": "--- REPLACE WITH YOUR Plivo Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Plivo From Number ---"
+    "FromNumber": "--- REPLACE WITH Plivo From Number ---",
+    "EnableLogging": true
   },
 
   //LiteX Nexmo Sms settings
@@ -38,26 +77,26 @@ Run the nuget command for installing the client as,
     "ApiSecret": "--- REPLACE WITH YOUR Nexmo ApiSecret ---",
     "ApplicationId": "--- REPLACE WITH YOUR Nexmo ApplicationId ---",
     "ApplicationKey": "--- REPLACE WITH YOUR Nexmo ApplicationKey ---",
-    "FromNumber": "--- REPLACE WITH Nexmo From Number ---"
+    "FromNumber": "--- REPLACE WITH Nexmo From Number ---",
+    "EnableLogging": true
   },
 
   //LiteX Sinch Sms settings
   "SinchConfig": {
     "ApiKey": "--- REPLACE WITH YOUR Sinch ApiKey ---",
     "ApiSecret": "--- REPLACE WITH YOUR Sinch ApiSecret ---",
-    "FromNumber": "--- REPLACE WITH Sinch From Number ---"
+    "FromNumber": "--- REPLACE WITH Sinch From Number ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### 2.2 : Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Sms
-
         #region LiteX Sms (Twilio)
 
         // 1. Use default configuration from appsettings.json's 'TwilioConfig'
@@ -70,6 +109,7 @@ public class Startup
             option.AccountSid = "";
             option.AuthToken = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -79,7 +119,8 @@ public class Startup
         {
             AccountSid = "",
             AuthToken = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXTwilioSms(twilioConfig);
 
@@ -97,6 +138,7 @@ public class Startup
             option.AuthId = "";
             option.AuthToken = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -106,7 +148,8 @@ public class Startup
         {
             AuthId = "",
             AuthToken = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXPlivoSms(plivoConfig);
 
@@ -126,6 +169,7 @@ public class Startup
             option.ApplicationId = "";
             option.ApplicationKey = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -137,7 +181,8 @@ public class Startup
             ApiSecret = "",
             ApplicationId = "",
             ApplicationKey = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXNexmoSms(nexmoConfig);
 
@@ -155,6 +200,7 @@ public class Startup
             option.ApiKey = "";
             option.ApiSecret = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -164,21 +210,20 @@ public class Startup
         {
             ApiKey = "",
             ApiSecret = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXSinchSms(sinchConfig);
 
         #endregion
 
-        #endregion
+        services.AddLiteXLogging();
     }
 }
 ```
 
+### Step 3 : Use in Controller or Business layer :memo:
 
-## Usage
-
-**Controller or Business layer**
 ```cs
 /// <summary>
 /// Customer controller
@@ -188,7 +233,7 @@ public class CustomerController : Controller
 {
     #region Fields
 
-    private readonly ISmsSender _smsSender;
+    private readonly ILiteXSmsSender _smsSender;
 
     #endregion
 
@@ -198,7 +243,7 @@ public class CustomerController : Controller
     /// Ctor
     /// </summary>
     /// <param name="smsSender"></param>
-    public CustomerController(ISmsSender smsSender)
+    public CustomerController(ILiteXSmsSender smsSender)
     {
         _smsSender = smsSender;
     }
@@ -247,10 +292,85 @@ public class CustomerController : Controller
     }
 
     #endregion
+
+    #region Utilities
+
+    private IList<Customer> GetCustomers()
+    {
+        IList<Customer> customers = new List<Customer>();
+
+        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
+
+        return customers;
+    }
+
+    private Customer GetCustomerById(int id)
+    {
+        Customer customer = null;
+
+        customer = GetCustomers().ToList().FirstOrDefault(x => x.Id == id);
+
+        return customer;
+    }
+
+    #endregion
 }
 ```
 
 
-### Coming soon...
+## Todo List :clipboard:
+
+#### Sms Providers
+
+- [x] Twilio
+- [x] Plivo
+- [x] Nexmo
+- [x] Sinch
+
+#### Basic Sms API
+
+- [x] Send Sms
+- [] Voice Sms
+- [] Send Bulk Sms
+
+
+#### Coming soon
 * Voice Sms
 * Bulk Sms
+
+---
+
+
+
+## Support :telephone:
+> Reach out to me at one of the following places!
+
+- Email :envelope: at <a href="mailto:toaashishpatel@gmail.com" target="_blank">`toaashishpatel@gmail.com`</a>
+- NuGet :package: at <a href="https://www.nuget.org/profiles/iamaashishpatel" target="_blank">`@iamaashishpatel`</a>
+
+
+
+## Authors :boy:
+
+* **Ashish Patel** - [A-Patel](https://github.com/a-patel)
+
+
+##### Connect with me
+
+| Linkedin | GitHub | Facebook | Twitter | Instagram | Tumblr | Website |
+|----------|----------|----------|----------|----------|----------|----------|
+| [![linkedin](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-linkedin.svg)](https://www.linkedin.com/in/iamaashishpatel) | [![github](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-github.svg)](https://github.com/a-patel) | [![facebook](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg)](https://twitter.com/aashish_mrcool) | [![instagram](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-instagram.svg)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-tumblr.svg)](https://iamaashishpatel.tumblr.com/) | [![website](https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-blogger.svg)](http://aashishpatel.co.nf/) |
+| | | | | | |
+
+
+
+## Donations :dollar:
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/iamaashishpatel)
+
+
+
+## License :lock:
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
