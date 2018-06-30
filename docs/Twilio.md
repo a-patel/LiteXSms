@@ -64,7 +64,10 @@ public class Startup
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXTwilioSms(twilioConfig);
+        services.AddLiteXTwilioSms(twilioConfig);        
+        
+        // add logging (optional)
+        services.AddLiteXLogging();
     }
 }
 ```
