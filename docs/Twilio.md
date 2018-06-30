@@ -1,39 +1,46 @@
 
 # LiteX Twilio Sms
-LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+      
+Allow sending texts via Twilio.
+      
+Wrapper around Twilio api to send sms messages from any type of application.
+
+Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
 
 
-## Add a dependency
-
-### Nuget
-
-Run the nuget command for installing the client as,
-* `Install-Package LiteX.Sms.Core`
-* `Install-Package LiteX.Sms.Twilio`
+## Basic Usage
 
 
-## Configuration
+### Install the package
 
-**AppSettings**
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
+
+```Powershell
+PM> Install-Package LiteX.Sms.Twilio
+```
+
+##### AppSettings
 ```js
-{
+{  
   //LiteX Twilio Sms settings
   "TwilioConfig": {
     "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
     "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Twilio From Number ---"
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
+    "EnableLogging": true
   }
 }
 ```
 
-**Startup Configuration**
+##### Configure Startup Class
 ```cs
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Sms (Twilio)
-
         // 1. Use default configuration from appsettings.json's 'TwilioConfig'
         services.AddLiteXTwilioSms();
 
@@ -44,6 +51,7 @@ public class Startup
             option.AccountSid = "";
             option.AuthToken = "";
             option.FromNumber = "";
+            option.EnableLogging = true;
         });
 
         //OR
@@ -53,91 +61,21 @@ public class Startup
         {
             AccountSid = "",
             AuthToken = "",
-            FromNumber = ""
+            FromNumber = "",
+            EnableLogging = true
         };
         services.AddLiteXTwilioSms(twilioConfig);
-
-        #endregion
     }
 }
 ```
 
+### Sample Usage Example
+> Same for all providers. 
 
-## Usage
-
-**Controller or Business layer**
-```cs
-/// <summary>
-/// Customer controller
-/// </summary>
-[Route("api/[controller]")]
-public class CustomerController : Controller
-{
-    #region Fields
-
-    private readonly ISmsSender _smsSender;
-
-    #endregion
-
-    #region Ctor
-
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    /// <param name="smsSender"></param>
-    public CustomerController(ISmsSender smsSender)
-    {
-        _smsSender = smsSender;
-    }
-
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Get Sms Provider Type
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    [Route("get-sms-provider-type")]
-    public IActionResult GetSmsProviderType()
-    {
-        return Ok(_smsSender.SmsProviderType.ToString());
-    }
-
-    /// <summary>
-    /// Send email to customer
-    /// </summary>
-    /// <param name="toPhoneNumber">To phone number</param>
-    /// <param name="messageText">message text</param>
-    /// <returns></returns>
-    [HttpPost]
-    [Route("send-sms-to-customer")]
-    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
-    {
-        try
-        {
-            toPhoneNumber = toPhoneNumber ?? "+919426432254";
-            messageText = messageText ?? "I am LiteX Sms!";
-
-            _smsSender.SendSms(toPhoneNumber, messageText);
-
-            // Async
-            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
-    }
-
-    #endregion
-}
-```
+For more helpful information about LiteX Sms, Please click [here.](https://github.com/a-patel/LiteXSms/blob/master/README.md#step-3--use-in-controller-or-business-layer-memo)
 
 
 ### Coming soon...
 * Voice Sms
 * Bulk Sms
+
