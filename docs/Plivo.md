@@ -25,11 +25,11 @@ PM> Install-Package LiteX.Sms.Twilio
 ##### AppSettings
 ```js
 {  
-  //LiteX Twilio Sms settings
-  "TwilioConfig": {
-    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
-    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
+  //LiteX Plivo Sms settings
+  "PlivoConfig": {
+    "AuthId": "--- REPLACE WITH YOUR Plivo Account SID ---",
+    "AuthToken": "--- REPLACE WITH YOUR Plivo Auth Token ---",
+    "FromNumber": "--- REPLACE WITH Plivo From Number ---",
     "EnableLogging": true
   }
 }
