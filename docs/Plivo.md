@@ -1,14 +1,14 @@
 
-# LiteX Twilio Sms
-> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+# LiteX Plivo Sms
+> LiteX.Sms.Plivo is a sms library which is based on LiteX.Sms.Core and Plivo Sms API.
       
 Allow sending texts via Twilio.
       
-Wrapper around Twilio api to send sms messages from any type of application.
+Wrapper around Plivo api to send sms messages from any type of application.
 
-Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+Small library for manage sms with Plivo. A quick setup for Plivo Sms.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Plivo integration with your system.
 
 
 ## Basic Usage
@@ -16,10 +16,10 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Plivo/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Twilio
+PM> Install-Package LiteX.Sms.Plivo
 ```
 
 ##### AppSettings
