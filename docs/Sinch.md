@@ -41,15 +41,15 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
-        services.AddLiteXTwilioSms();
+        // 1. Use default configuration from appsettings.json's 'SinchConfig'
+        services.AddLiteXSinchSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXTwilioSms(option =>
+        services.AddLiteXSinchSms(option =>
         {
-            option.AccountSid = "";
-            option.AuthToken = "";
+            option.ApiKey = "";
+            option.ApiSecret = "";
             option.FromNumber = "";
             option.EnableLogging = true;
         });
@@ -57,14 +57,15 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var twilioConfig = new TwilioConfig()
+        var sinchConfig = new SinchConfig()
         {
-            AccountSid = "",
-            AuthToken = "",
+            ApiKey = "",
+            ApiSecret = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXTwilioSms(twilioConfig);        
+        services.AddLiteXSinchSms(sinchConfig);
+        
         
         // add logging (optional)
         services.AddLiteXLogging();
