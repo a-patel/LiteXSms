@@ -41,14 +41,14 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
-        services.AddLiteXTwilioSms();
+        // 1. Use default configuration from appsettings.json's 'PlivoConfig'
+        services.AddLiteXPlivoSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXTwilioSms(option =>
+        services.AddLiteXPlivoSms(option =>
         {
-            option.AccountSid = "";
+            option.AuthId = "";
             option.AuthToken = "";
             option.FromNumber = "";
             option.EnableLogging = true;
@@ -57,14 +57,15 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var twilioConfig = new TwilioConfig()
+        var plivoConfig = new PlivoConfig()
         {
-            AccountSid = "",
+            AuthId = "",
             AuthToken = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXTwilioSms(twilioConfig);        
+        services.AddLiteXPlivoSms(plivoConfig);
+        
         
         // add logging (optional)
         services.AddLiteXLogging();
