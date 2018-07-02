@@ -25,11 +25,13 @@ PM> Install-Package LiteX.Sms.Twilio
 ##### AppSettings
 ```js
 {  
-  //LiteX Twilio Sms settings
-  "TwilioConfig": {
-    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
-    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
+  //LiteX Nexmo Sms settings
+  "NexmoConfig": {
+    "ApiKey": "--- REPLACE WITH YOUR Nexmo ApiKey ---",
+    "ApiSecret": "--- REPLACE WITH YOUR Nexmo ApiSecret ---",
+    "ApplicationId": "--- REPLACE WITH YOUR Nexmo ApplicationId ---",
+    "ApplicationKey": "--- REPLACE WITH YOUR Nexmo ApplicationKey ---",
+    "FromNumber": "--- REPLACE WITH Nexmo From Number ---",
     "EnableLogging": true
   }
 }
