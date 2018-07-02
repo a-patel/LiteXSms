@@ -1,14 +1,14 @@
 
-# LiteX Twilio Sms
-> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+# LiteX Nexmo Sms
+> LiteX.Sms.Nexmo is a sms library which is based on LiteX.Sms.Core and Nexmo Sms API.
       
-Allow sending texts via Twilio.
+Allow sending texts via Nexmo.
       
-Wrapper around Twilio api to send sms messages from any type of application.
+Wrapper around Nexmo api to send sms messages from any type of application.
 
-Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+Small library for manage sms with Nexmo. A quick setup for Nexmo Sms.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Nexmo integration with your system.
 
 
 ## Basic Usage
@@ -16,10 +16,10 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Nexmo/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Twilio
+PM> Install-Package LiteX.Sms.Nexmo
 ```
 
 ##### AppSettings
