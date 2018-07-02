@@ -1,14 +1,14 @@
 
-# LiteX Sinch Sms
-> LiteX.Sms.Sinch is a sms library which is based on LiteX.Sms.Core and Sinch Sms API.
+# LiteX Twilio Sms
+> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
       
-Allow sending texts via Sinch.
+Allow sending texts via Twilio.
       
-Wrapper around Sinch api to send sms messages from any type of application.
+Wrapper around Twilio api to send sms messages from any type of application.
 
-Small library for manage sms with Sinch. A quick setup for Sinch Sms.
+Small library for manage sms with Twilio. A quick setup for Twilio Sms.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Sinch integration with your system.
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
 
 
 ## Basic Usage
@@ -16,20 +16,20 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Sinch/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Sinch
+PM> Install-Package LiteX.Sms.Twilio
 ```
 
 ##### AppSettings
 ```js
 {  
-  //LiteX Sinch Sms settings
-  "SinchConfig": {
-    "ApiKey": "--- REPLACE WITH YOUR Sinch ApiKey ---",
-    "ApiSecret": "--- REPLACE WITH YOUR Sinch ApiSecret ---",
-    "FromNumber": "--- REPLACE WITH Sinch From Number ---",
+  //LiteX Twilio Sms settings
+  "TwilioConfig": {
+    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
+    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
     "EnableLogging": true
   }
 }
@@ -41,15 +41,15 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'SinchConfig'
-        services.AddLiteXSinchSms();
+        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
+        services.AddLiteXTwilioSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXSinchSms(option =>
+        services.AddLiteXTwilioSms(option =>
         {
-            option.ApiKey = "";
-            option.ApiSecret = "";
+            option.AccountSid = "";
+            option.AuthToken = "";
             option.FromNumber = "";
             option.EnableLogging = true;
         });
@@ -57,15 +57,14 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var sinchConfig = new SinchConfig()
+        var twilioConfig = new TwilioConfig()
         {
-            ApiKey = "",
-            ApiSecret = "",
+            AccountSid = "",
+            AuthToken = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXSinchSms(sinchConfig);
-        
+        services.AddLiteXTwilioSms(twilioConfig);        
         
         // add logging (optional)
         services.AddLiteXLogging();
@@ -82,3 +81,4 @@ For more helpful information about LiteX Sms, Please click [here.](https://githu
 ### Coming soon...
 * Voice Sms
 * Bulk Sms
+
