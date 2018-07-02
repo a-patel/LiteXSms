@@ -1,13 +1,14 @@
-# LiteX Plivo Sms
-LiteX.Sms.Plivo is a sms library which is based on LiteX.Sms.Core and Plivo Sms API.
-      
-Allow sending texts via Plivo.
-      
-Wrapper around Plivo api to send sms messages from any type of application.
 
-Small library for manage sms with Plivo. A quick setup for Plivo Sms.
+# LiteX Twilio Sms
+> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+      
+Allow sending texts via Twilio.
+      
+Wrapper around Twilio api to send sms messages from any type of application.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Plivo integration with your system.
+Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
 
 
 ## Basic Usage
@@ -15,20 +16,20 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Plivo/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Plivo
+PM> Install-Package LiteX.Sms.Twilio
 ```
 
 ##### AppSettings
 ```js
 {  
-  //LiteX Plivo Sms settings
-  "PlivoConfig": {
-    "AuthId": "--- REPLACE WITH YOUR Plivo Account SID ---",
-    "AuthToken": "--- REPLACE WITH YOUR Plivo Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Plivo From Number ---",
+  //LiteX Twilio Sms settings
+  "TwilioConfig": {
+    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
+    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
     "EnableLogging": true
   }
 }
@@ -40,14 +41,14 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'PlivoConfig'
-        services.AddLiteXPlivoSms();
+        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
+        services.AddLiteXTwilioSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXPlivoSms(option =>
+        services.AddLiteXTwilioSms(option =>
         {
-            option.AuthId = "";
+            option.AccountSid = "";
             option.AuthToken = "";
             option.FromNumber = "";
             option.EnableLogging = true;
@@ -56,14 +57,14 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var plivoConfig = new PlivoConfig()
+        var twilioConfig = new TwilioConfig()
         {
-            AuthId = "",
+            AccountSid = "",
             AuthToken = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXPlivoSms(plivoConfig);        
+        services.AddLiteXTwilioSms(twilioConfig);        
         
         // add logging (optional)
         services.AddLiteXLogging();
