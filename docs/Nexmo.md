@@ -43,15 +43,17 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
-        services.AddLiteXTwilioSms();
+        // 1. Use default configuration from appsettings.json's 'NexmoConfig'
+        services.AddLiteXNexmoSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXTwilioSms(option =>
+        services.AddLiteXNexmoSms(option =>
         {
-            option.AccountSid = "";
-            option.AuthToken = "";
+            option.ApiKey = "";
+            option.ApiSecret = "";
+            option.ApplicationId = "";
+            option.ApplicationKey = "";
             option.FromNumber = "";
             option.EnableLogging = true;
         });
@@ -59,14 +61,17 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var twilioConfig = new TwilioConfig()
+        var nexmoConfig = new NexmoConfig()
         {
-            AccountSid = "",
-            AuthToken = "",
+            ApiKey = "",
+            ApiSecret = "",
+            ApplicationId = "",
+            ApplicationKey = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXTwilioSms(twilioConfig);        
+        services.AddLiteXNexmoSms(nexmoConfig);
+        
         
         // add logging (optional)
         services.AddLiteXLogging();
