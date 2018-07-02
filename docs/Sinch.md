@@ -25,11 +25,11 @@ PM> Install-Package LiteX.Sms.Twilio
 ##### AppSettings
 ```js
 {  
-  //LiteX Twilio Sms settings
-  "TwilioConfig": {
-    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
-    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
-    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
+  //LiteX Sinch Sms settings
+  "SinchConfig": {
+    "ApiKey": "--- REPLACE WITH YOUR Sinch ApiKey ---",
+    "ApiSecret": "--- REPLACE WITH YOUR Sinch ApiSecret ---",
+    "FromNumber": "--- REPLACE WITH Sinch From Number ---",
     "EnableLogging": true
   }
 }
