@@ -1,14 +1,14 @@
 
-# LiteX Nexmo Sms
-LiteX.Sms.Nexmo is a sms library which is based on LiteX.Sms.Core and Nexmo Sms API.
+# LiteX Twilio Sms
+> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
       
-Allow sending texts via Nexmo.
+Allow sending texts via Twilio.
       
-Wrapper around Nexmo api to send sms messages from any type of application.
+Wrapper around Twilio api to send sms messages from any type of application.
 
-Small library for manage sms with Nexmo. A quick setup for Nexmo Sms.
+Small library for manage sms with Twilio. A quick setup for Twilio Sms.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Nexmo integration with your system.
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
 
 
 ## Basic Usage
@@ -16,22 +16,20 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Nexmo/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Nexmo
+PM> Install-Package LiteX.Sms.Twilio
 ```
 
 ##### AppSettings
 ```js
 {  
-  //LiteX Nexmo Sms settings
-  "NexmoConfig": {
-    "ApiKey": "--- REPLACE WITH YOUR Nexmo ApiKey ---",
-    "ApiSecret": "--- REPLACE WITH YOUR Nexmo ApiSecret ---",
-    "ApplicationId": "--- REPLACE WITH YOUR Nexmo ApplicationId ---",
-    "ApplicationKey": "--- REPLACE WITH YOUR Nexmo ApplicationKey ---",
-    "FromNumber": "--- REPLACE WITH Nexmo From Number ---",
+  //LiteX Twilio Sms settings
+  "TwilioConfig": {
+    "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
+    "AuthToken": "--- REPLACE WITH YOUR Twilio Auth Token ---",
+    "FromNumber": "--- REPLACE WITH Twilio From Number ---",
     "EnableLogging": true
   }
 }
@@ -43,17 +41,15 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1. Use default configuration from appsettings.json's 'NexmoConfig'
-        services.AddLiteXNexmoSms();
+        // 1. Use default configuration from appsettings.json's 'TwilioConfig'
+        services.AddLiteXTwilioSms();
 
         //OR
         // 2. Load configuration settings using options.
-        services.AddLiteXNexmoSms(option =>
+        services.AddLiteXTwilioSms(option =>
         {
-            option.ApiKey = "";
-            option.ApiSecret = "";
-            option.ApplicationId = "";
-            option.ApplicationKey = "";
+            option.AccountSid = "";
+            option.AuthToken = "";
             option.FromNumber = "";
             option.EnableLogging = true;
         });
@@ -61,17 +57,14 @@ public class Startup
         //OR
         // 3. Load configuration settings on your own.
         // (e.g. appsettings, database, hardcoded)
-        var nexmoConfig = new NexmoConfig()
+        var twilioConfig = new TwilioConfig()
         {
-            ApiKey = "",
-            ApiSecret = "",
-            ApplicationId = "",
-            ApplicationKey = "",
+            AccountSid = "",
+            AuthToken = "",
             FromNumber = "",
             EnableLogging = true
         };
-        services.AddLiteXNexmoSms(nexmoConfig);        
-        
+        services.AddLiteXTwilioSms(twilioConfig);        
         
         // add logging (optional)
         services.AddLiteXLogging();
@@ -88,3 +81,4 @@ For more helpful information about LiteX Sms, Please click [here.](https://githu
 ### Coming soon...
 * Voice Sms
 * Bulk Sms
+
