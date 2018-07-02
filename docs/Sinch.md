@@ -1,14 +1,14 @@
 
-# LiteX Twilio Sms
-> LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
+# LiteX Sinch Sms
+> LiteX.Sms.Sinch is a sms library which is based on LiteX.Sms.Core and Sinch Sms API.
       
 Allow sending texts via Twilio.
       
-Wrapper around Twilio api to send sms messages from any type of application.
+Wrapper around Sinch api to send sms messages from any type of application.
 
-Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+Small library for manage sms with Sinch. A quick setup for Sinch Sms.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
+Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Sinch integration with your system.
 
 
 ## Basic Usage
@@ -16,10 +16,10 @@ Wrapper library is just written for the purpose to bring a new level of ease to 
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Twilio/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.Sms.Sinch/).
 
 ```Powershell
-PM> Install-Package LiteX.Sms.Twilio
+PM> Install-Package LiteX.Sms.Sinch
 ```
 
 ##### AppSettings
