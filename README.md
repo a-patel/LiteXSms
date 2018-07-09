@@ -336,6 +336,7 @@ public class CustomerController : Controller
 
 
 #### Coming soon
+* Response Result
 * Voice Sms
 * Bulk Sms
 
