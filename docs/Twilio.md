@@ -1,14 +1,15 @@
 
 # LiteX Twilio Sms
 > LiteX.Sms.Twilio is a sms library which is based on LiteX.Sms.Core and Twilio Sms API.
-      
-Allow sending texts via Twilio.
-      
-Wrapper around Twilio api to send sms messages from any type of application.
 
-Small library for manage sms with Twilio. A quick setup for Twilio Sms.
+Allow sending texts sms via Twilio.
 
-Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with Twilio integration with your system.
+This client library enables working with the Twilio API to sending text messages.
+
+Small library to abstract sending text messages to Twilio API. Quick setup for Twilio API and very simple wrapper for the Twilio API to text messages.
+
+Very simple configuration in advanced ways. Purpose of this package is to bring a new level of ease to the developers who deal with Twilio API integration with their system.
+
 
 
 ## Basic Usage
