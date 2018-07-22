@@ -266,53 +266,25 @@ public class CustomerController : Controller
     }
 
     /// <summary>
-    /// Send email to customer
+    /// Send sms
     /// </summary>
     /// <param name="toPhoneNumber">To phone number</param>
     /// <param name="messageText">message text</param>
     /// <returns></returns>
     [HttpPost]
-    [Route("send-sms-to-customer")]
-    public IActionResult SendSmsToCustomer(string toPhoneNumber, string messageText)
+    [Route("send-sms")]
+    public async Task<IActionResult> SendSms(string toPhoneNumber, string messageText)
     {
-        try
-        {
-            toPhoneNumber = toPhoneNumber ?? "+919426432254";
-            messageText = messageText ?? "I am LiteX Sms!";
+        toPhoneNumber = toPhoneNumber ?? "+919426432254";
+        messageText = messageText ?? "I am LiteX Sms!";
 
-            _smsSender.SendSms(toPhoneNumber, messageText);
+        // async
+        var result = await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
 
-            // Async
-            //await _smsSender.SendSmsAsync(toPhoneNumber, messageText);
+        // sync
+        //var result = _smsSender.SendSms(toPhoneNumber, messageText);
 
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex);
-        }
-    }
-
-    #endregion
-
-    #region Utilities
-
-    private IList<Customer> GetCustomers()
-    {
-        IList<Customer> customers = new List<Customer>();
-
-        customers.Add(new Customer() { Id = 1, Username = "ashish", Email = "toaashishpatel@outlook.com" });
-
-        return customers;
-    }
-
-    private Customer GetCustomerById(int id)
-    {
-        Customer customer = null;
-
-        customer = GetCustomers().ToList().FirstOrDefault(x => x.Id == id);
-
-        return customer;
+        return Ok(result);
     }
 
     #endregion
