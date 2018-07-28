@@ -1,7 +1,7 @@
 # LiteXSms
 > LiteXSms is simple yet powerful and very high-performance sms mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending sms more easier!
 
-> Provide Sms service for any type of application (.NET Core, .NET Standard).
+Provide Storage service for ASP.NET Core (2.0 and later) applications.
 
 Abstract interface to implement any kind of basic sms message services (e.g. Twilio, Plivo, Nexmo, Sinch). Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with sms integration with your system.
 
