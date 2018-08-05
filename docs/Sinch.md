@@ -2,7 +2,7 @@
 # LiteX Sinch Sms
 > LiteX.Sms.Sinch is a sms library which is based on LiteX.Sms.Core and Sinch Sms API.
       
-Allow sending texts via Twilio.
+Allow sending texts via Sinch API.
       
 Wrapper around Sinch api to send sms messages from any type of application.
 
