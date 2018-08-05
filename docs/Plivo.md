@@ -2,7 +2,7 @@
 # LiteX Plivo Sms
 > LiteX.Sms.Plivo is a sms library which is based on LiteX.Sms.Core and Plivo Sms API.
       
-Allow sending texts via Twilio.
+Allow sending texts via Plivo API.
       
 Wrapper around Plivo api to send sms messages from any type of application.
 
