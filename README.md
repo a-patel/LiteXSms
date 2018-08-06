@@ -1,5 +1,5 @@
 # LiteXSms
-> LiteXSms is simple yet powerful and very high-performance sms mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending sms more easier!
+> LiteXSms is simple yet powerful and very high-performance sms sending mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending sms more easier!
 
 Provide Storage service for ASP.NET Core (2.0 and later) applications.
 
