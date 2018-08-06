@@ -25,7 +25,7 @@ PM> Install-Package LiteX.Sms.Twilio
 
 ##### AppSettings
 ```js
-{  
+{
   //LiteX Twilio Sms settings
   "TwilioConfig": {
     "AccountSid": "--- REPLACE WITH YOUR Twilio SID ---",
