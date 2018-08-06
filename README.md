@@ -1,19 +1,13 @@
 # LiteXSms
 > LiteXSms is simple yet powerful and very high-performance sms sending mechanism and incorporating both synchronous and asynchronous usage with some advanced usages which can help us to handle sending sms more easier!
 
-Provide Storage service for ASP.NET Core (2.0 and later) applications.
+Provide sms service for ASP.NET Core (2.0 and later) applications.
 
-Abstract interface to implement any kind of basic sms message services (e.g. Twilio, Plivo, Nexmo, Sinch). Wrapper library is just written for the purpose to bring a new level of ease to the developers who deal with sms integration with your system.
+Small library to abstract sms functionalities. Quick setup for any sms provider and very simple wrapper for the widely used sms providers. LiteXSms uses the least common denominator of functionality between the supported providers to send sms solution. Abstract interface to implement any kind of basic sms services. Having a default/generic implementation to wrap the Twilio, Plivo, Nexmo, Sinch. A sms abstraction.
 
-It supports various sms providers and implements many advanced features. You can also write your own and extend it also extend existing providers.
+Very simple configuration in advanced ways. Purpose of this package is to bring a new level of ease to the developers who deal with different sms provider integration with their system and implements many advanced features. You can also write your own and extend it also extend existing providers. Easily migrate or switch between one to another provider with no code breaking changes.
 
-Easily migrate or switch between one to another provider with no code breaking changes.
-
-Having a default/generic implementation to wrap the Twilio, Plivo, Nexmo, Sinch and independed on the underlying provider SDK(s).
-
-The Core library contains all base interfaces and tools. One should install at least one other LiteXSms package to get sms handle implementations.
-
-This is the ASP.NET Core configuration integration package (Built-in).
+LiteXSms is an interface to unify the programming model for various sms providers. The Core library contains all base interfaces and tools. One should install at least one other LiteXSms package to get sms implementation.
 
 
 
