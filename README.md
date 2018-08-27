@@ -10,13 +10,11 @@ Very simple configuration in advanced ways. Purpose of this package is to bring 
 LiteXSms is an interface to unify the programming model for various sms providers. The Core library contains all base interfaces and tools. One should install at least one other LiteXSms package to get sms implementation.
 
 
-
 ## Cache Providers :books:
 - [Twilio](docs/Twilio.md)
 - [Plivo](docs/Plivo.md)
 - [Nexmo](docs/Nexmo.md)
 - [Sinch](docs/Sinch.md)
-
 
 
 ## Features :pager:
@@ -26,9 +24,7 @@ LiteXSms is an interface to unify the programming model for various sms provider
 - Leverages a provider model on top of ILiteXSmsSender under the hood and can be extended with your own implementation
 
 
-
 ## Basic Usage :page_facing_up:
-
 
 ### Step 1 : Install the package :package:
 
