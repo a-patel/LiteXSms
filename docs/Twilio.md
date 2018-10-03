@@ -80,6 +80,5 @@ For more helpful information about LiteX Sms, Please click [here.](https://githu
 
 
 ### Coming soon...
-* Voice Sms
 * Bulk Sms
 
