@@ -22,6 +22,7 @@ LiteXSms is an interface to unify the programming model for various sms provider
 - Thread safe, concurrency ready
 - Interface based API to support the test driven development and dependency injection
 - Leverages a provider model on top of ILiteXSmsSender under the hood and can be extended with your own implementation
+- Voice Sms
 
 
 ## Basic Usage :page_facing_up:
@@ -299,8 +300,6 @@ public class CustomerController : Controller
 
 
 #### Coming soon
-* Response Result
-* Voice Sms
 * Bulk Sms
 
 ---
