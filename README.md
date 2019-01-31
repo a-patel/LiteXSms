@@ -300,7 +300,10 @@ public class CustomerController : Controller
 
 
 #### Coming soon
-* Bulk Sms
+- Obsolete sync methods
+- Multiple provider support (using provider factory)
+- Bulk Sms
+
 
 ---
 
