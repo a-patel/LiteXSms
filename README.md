@@ -20,6 +20,8 @@ LiteXSms is an interface to unify the programming model for various sms provider
 ## Features :pager:
 - Async compatible
 - Thread safe, concurrency ready
+- Multiple provider support (using provider factory)
+- Obsolete sync methods
 - Interface based API to support the test driven development and dependency injection
 - Leverages a provider model on top of ILiteXSmsSender under the hood and can be extended with your own implementation
 - Voice Sms
@@ -300,9 +302,11 @@ public class CustomerController : Controller
 
 
 #### Coming soon
-- Obsolete sync methods
-- Multiple provider support (using provider factory)
+- .NET Standard 2.1 support
+- .NET 5.0 support
+- Remove sync methods
 - Bulk Sms
+
 
 
 ---
